@@ -1,5 +1,3 @@
-import { Assets } from "./assets.js";
-
 export class Boss {
   constructor() {
     this.x = 240;
@@ -33,7 +31,7 @@ export class Boss {
         enemyBullets.push({
           x: this.x,
           y: this.y + 20,
-          r: 5,
+          r: 6,
           vx: Math.cos(angle) * 3,
           vy: Math.sin(angle) * 3
         });
@@ -42,13 +40,17 @@ export class Boss {
   }
 
   draw(r) {
-    r.ctx.drawImage(Assets.images.boss, this.x - 80, this.y - 60, 160, 120);
+    const c = r.ctx;
 
-    r.ctx.fillStyle = "rgba(0,0,0,0.6)";
-    r.ctx.fillRect(40, 20, 400, 16);
+    // ボス本体（大きな四角）
+    c.fillStyle = "#f0f";
+    c.fillRect(this.x - 80, this.y - 40, 160, 80);
 
-    r.ctx.fillStyle = "#f0f";
-    r.ctx.fillRect(40, 20, 400 * (this.hp / this.maxHp), 16);
+    // HPバー
+    c.fillStyle = "rgba(0,0,0,0.6)";
+    c.fillRect(40, 20, 400, 16);
+
+    c.fillStyle = "#f0f";
+    c.fillRect(40, 20, 400 * (this.hp / this.maxHp), 16);
   }
 }
-
