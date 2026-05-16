@@ -1,11 +1,9 @@
-import { Assets } from "./assets.js";
-
 export class Powerup {
   constructor(x, y, type) {
     this.x = x;
     this.y = y;
     this.type = type;
-    this.r = 16;
+    this.r = 14;
     this.vy = 2;
   }
 
@@ -14,6 +12,14 @@ export class Powerup {
   }
 
   draw(r) {
-    r.ctx.drawImage(Assets.images.powerup, this.x - 16, this.y - 16, 32, 32);
+    const c = r.ctx;
+
+    if (this.type === "spread") c.fillStyle = "#4cff4c";
+    else if (this.type === "rapid") c.fillStyle = "#ffb84c";
+    else c.fillStyle = "#4ccfff";
+
+    c.beginPath();
+    c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    c.fill();
   }
 }
