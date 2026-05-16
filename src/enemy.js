@@ -1,13 +1,11 @@
-import { Assets } from "./assets.js";
-
 export class Enemy {
   constructor(x, y, type = 1) {
     this.x = x;
     this.y = y;
     this.type = type;
 
-    this.r = 20;
-    this.hp = type === 1 ? 3 : 5;
+    this.r = type === 1 ? 18 : 24;
+    this.hp = type === 1 ? 3 : 6;
 
     this.vx = (Math.random() < 0.5 ? -1 : 1) * 0.6;
     this.vy = 2.0;
@@ -35,7 +33,10 @@ export class Enemy {
   }
 
   draw(r) {
-    const img = this.type === 1 ? Assets.images.enemy1 : Assets.images.enemy2;
-    r.ctx.drawImage(img, this.x - 24, this.y - 24, 48, 48);
+    const c = r.ctx;
+    c.fillStyle = this.type === 1 ? "#f44" : "#f88";
+    c.beginPath();
+    c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    c.fill();
   }
 }
